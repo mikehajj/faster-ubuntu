@@ -1,0 +1,25 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: docker build . --tag mikehajj/faster-ubuntu:latest
+    - name: Login to Docker
+      run: docker login --username mikehajj --password $docker_pwd
+      env: 
+        docker_pwd: ${{ secrets.DOCKER_PWD }}
+    - name: Push Image to Docker Hub
+      run: docker push mikehajj/faster-ubuntu:latest
+
