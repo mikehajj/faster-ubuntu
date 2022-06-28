@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:latest
 MAINTAINER Mike Hajj <mike@mikehajj.com>
 
 RUN echo "Upgrading OS max File Limits and uLimits"
